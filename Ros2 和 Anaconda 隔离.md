@@ -115,11 +115,11 @@ function activate_conda() {
  
 function show_env() {
     if [ -n "$ROS_DISTRO" ]; then
-        echo "当前环境：ROS2: $ROS_DISTRO"
+        echo "当前环境： ROS2: $ROS_DISTRO"
     elif [ -n "$CONDA_DEFAULT_ENV" ]; then
-        echo "当前环境：Anaconda3: $CONDA_DEFAULT_ENV"
+        echo "当前环境： Anaconda3: $CONDA_DEFAULT_ENV"
     else
-        echo "当前环境：基础系统环境"
+        echo "当前环境： 基础系统环境"
     fi
 }
  
@@ -127,7 +127,7 @@ function show_env() {
 alias ros_env='activate_ros'
 alias conda_env='activate_conda'
 alias base_env='deactivate_all && echo "已切换到基础系统环境"'
-alias current_env='show_env'
+alias now_env='show_env'
  
 # 自定义bash提示符，显示当前环境
 function set_prompt() {
@@ -163,7 +163,7 @@ function set_prompt() {
     
     #PS1="${env_indicator} ${color_blue}\u@\h${color_default}:${color_cyan}\w${color_default}\n\$"
     #PS1="${env_indicator}${color_green}\u@\h${color_default}:${color_blue}\w${color_default}$"
-        PS1="${env_indicator}${PS1_ORIGINAL}"
+    PS1="${env_indicator}${PS1_ORIGINAL}"
 
 }
  
@@ -180,8 +180,10 @@ echo "=========== 环境切换命令 ==========="
 echo "ros_env       - 激活 ROS Humble 环境"
 echo "conda_env     - 激活 Anaconda3 环境"
 echo "base_env      - 返回基础系统环境"
-echo "current_env   - 显示当前环境状态"
+echo "now_env   - 显示当前环境状态"
 echo "=================================="
+
+activate_conda  #默认激活conda环境
 
 
 ```
