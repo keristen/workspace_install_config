@@ -167,11 +167,15 @@ function set_prompt() {
 
 }
  
- 
-# 关键：保存系统原生PS1（必须在定义set_prompt前执行，避免被覆盖）
-if [ -z "$PS1_ORIGINAL" ]; then
-    export PS1_ORIGINAL="$PS1"
-fi 
+# 只在交互 shell 中保存带颜色的原始 PS1,防止远程ssh用户名@主机名为白色
+if [[ $- == *i* ]]; then
+    if [ -z "$PS1_ORIGINAL_SAVED" ]; then
+        export PS1_ORIGINAL_SAVED=1
+        export PS1_ORIGINAL="$PS1"
+    fi
+fi
+
+
 # 设置PROMPT_COMMAND
 PROMPT_COMMAND=set_prompt
  
