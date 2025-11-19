@@ -163,17 +163,14 @@ function set_prompt() {
     
     #PS1="${env_indicator} ${color_blue}\u@\h${color_default}:${color_cyan}\w${color_default}\n\$"
     #PS1="${env_indicator}${color_green}\u@\h${color_default}:${color_blue}\w${color_default}$"
-    PS1="${env_indicator}${PS1_ORIGINAL}"
+    # PS1="${env_indicator}${PS1_ORIGINAL}"
 
 }
- 
-# 只在交互 shell 中保存带颜色的原始 PS1,防止远程ssh用户名@主机名为白色
-if [[ $- == *i* ]]; then
-    if [ -z "$PS1_ORIGINAL_SAVED" ]; then
-        export PS1_ORIGINAL_SAVED=1
-        export PS1_ORIGINAL="$PS1"
-    fi
-fi
+
+# 使用PROMPT_COMMAND刷新PS1
+PROMPT_COMMAND='PS1="${env_indicator}${color_green}\u@\h${color_default}:${color_blue}\w${color_default}\$ "'
+
+
 
 
 # 设置PROMPT_COMMAND
@@ -188,6 +185,7 @@ echo "now_env   - 显示当前环境状态"
 echo "=================================="
 
 activate_conda  #默认激活conda环境
+
 
 
 ```
